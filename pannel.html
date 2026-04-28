@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Casa Automobilistica</title>
+    <link rel="stylesheet" href="style/style.css">
+</head>
+<body>
+
+    <header>
+        <h1>Casa Automobilistica</h1>
+        <div>
+            <a href="index.html">Officine</a>
+            <span>Ciao, <strong id="username"></strong>!</span>
+            <button class="btn-logout" onclick="logout()">Logout</button>
+        </div>
+    </header>
+
+    <div class="container">
+
+        <div class="tabs">
+            <button class="tab active" onclick="switchTab('servizi')">Servizi</button>
+            <button class="tab" onclick="switchTab('ricambi')">Ricambi</button>
+            <button class="tab" onclick="switchTab('articoli')">Accessori</button>
+        </div>
+
+        <div class="search-bar">
+            <input type="text" id="search-input" placeholder="Cerca per descrizione..." oninput="filterItems()">
+        </div>
+
+        <div class="grid" id="item-grid">
+            <p class="loading">Caricamento...</p>
+        </div>
+
+        <div class="cart-section">
+            <h2>Carrello</h2>
+            <div id="cart-items"><p class="empty">Carrello vuoto</p></div>
+            <div class="cart-footer">
+                <span class="cart-total" id="cart-total"></span>
+                <button class="btn-green" onclick="acquista()">Acquista</button>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- modale officine -->
+    <div class="modal-bg" id="modal-bg">
+        <div class="modal">
+            <div class="modal-header">
+                <h2 id="modal-title">Officine disponibili</h2>
+                <button class="modal-close" onclick="closeModal()">✕</button>
+            </div>
+            <div id="modal-officine"></div>
+        </div>
+    </div>
+
+    <script src="js/main.js"></script>
+</body>

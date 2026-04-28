@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Login</title>
+    <link rel="stylesheet" href="style/style.css">
+</head>
+<body class="auth-page">
+    <div class="auth-box" id="login-form" style="display:none;">
+        <h1>Login</h1>
+        <input id="username" placeholder="Username">
+        <input id="password" type="password" placeholder="Password">
+        <button class="btn-primary" onclick="login()">Accedi</button>
+        <div class="link">Non hai un account? <a href="register.html">Registrati</a></div>
+        <div id="message" class="message"></div>
+    </div>
+    <div id="loading" style="text-align:center;padding:50px;">Reindirizzamento...</div>
+    <script>
+    fetch('api/check_session.php').then(r=>r.json()).then(data=>{
+        if(data.loggedIn){
+            if(data.ruolo==='admin')location.href='admin.html';
+            else if(data.ruolo==='dipendente')location.href='dipendente.html';
+            else location.href='pannel.html';
+        }else{
+            document.getElementById('login-form').style.display='block';
+            document.getElementById('loading').style.display='none';
+        }
+    });
+    </script>
+    <script src="js/main.js"></script>
+</body>

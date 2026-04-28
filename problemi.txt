@@ -1,0 +1,6 @@
+1) (fatto) se aggiungo un servizio e un ricambio al carrello, non mi da entrambi ma mi aumenta la quantità del primo elemento che scelgo di aggiungere
+2) la disponibilità non viene contata nel carrello e nemmeno meno diminuita
+3) (fatto) nel carrello posso rimuovere solamente tutto il blocco senza scegliere quante toglierne con precisione
+4) (fatto) manca la possibilità di aggiungere un'officina
+5) (fatto) far si che prodotti uguali vengano visualizzati una volta e successivamente poter scegliere l'officina
+6) manca lo scontrino, dopo aver acquistato non succede nulla

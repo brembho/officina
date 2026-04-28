@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Officine - Casa Automobilistica</title>
+    <link rel="stylesheet" href="style/style.css">
+</head>
+<body>
+
+    <header>
+        <h1>Casa Automobilistica</h1>
+        <div id="header-nav">
+            <a href="pannel.html">Login</a>
+        </div>
+    </header>
+
+    <div class="container">
+        <h2 style="margin-bottom:16px;">Officine</h2>
+
+        <!-- ricerca prodotto -->
+        <div style="background:white;border:1px solid #ddd;border-radius:6px;padding:20px;margin-bottom:24px;">
+            <h3 style="margin-bottom:12px;">Cerca officine per prodotto/servizio</h3>
+            <div style="display:flex;gap:10px;flex-wrap:wrap;align-items:flex-end;">
+                <div>
+                    <label>Tipo</label><br>
+                    <select id="cerca-tipo" style="width:140px;">
+                        <option value="servizio">Servizio</option>
+                        <option value="pezzo">Ricambio</option>
+                        <option value="articolo">Accessorio</option>
+                    </select>
+                </div>
+                <div>
+                    <label>Codice</label><br>
+                    <input id="cerca-codice" type="text" placeholder="es. 1" style="padding:8px;border:1px solid #ccc;border-radius:4px;">
+                </div>
+                <button class="btn-primary" onclick="cercaPerProdotto()">Cerca</button>
+            </div>
+            <div id="risultati-ricerca" style="margin-top:14px;"></div>
+        </div>
+
+        <!-- elenco officine -->
+        <div id="lista-officine"><p class="loading">Caricamento...</p></div>
+    </div>
+
+    <!-- modale inventario officina -->
+    <div class="modal-bg" id="modal-bg">
+        <div class="modal" style="width:600px;">
+            <div class="modal-header">
+                <h2 id="modal-title">Inventario</h2>
+                <button class="modal-close" onclick="chiudiModal()">✕</button>
+            </div>
+            <div class="tabs" id="modal-tabs" style="margin-bottom:12px;">
+                <button class="tab active" onclick="filtraInventario('tutti')">Tutti</button>
+                <button class="tab" onclick="filtraInventario('servizio')">Servizi</button>
+                <button class="tab" onclick="filtraInventario('pezzo')">Ricambi</button>
+                <button class="tab" onclick="filtraInventario('articolo')">Accessori</button>
+            </div>
+            <div id="modal-inventario"></div>
+        </div>
+    </div>
+
+    <script src="js/main.js"></script>
+    <script>initOfficine();</script>
+</body>

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Dipendente - Casa Automobilistica</title>
+    <link rel="stylesheet" href="style/style.css">
+</head>
+<body>
+
+    <header>
+        <h1>Pannello Dipendente</h1>
+        <div>
+            <a href="pannel.html">← Sito</a>
+            <span>Ciao, <strong id="username"></strong>!</span>
+            <button class="btn-logout" onclick="logout()">Logout</button>
+        </div>
+    </header>
+
+    <div class="container">
+        <div style="display:flex;gap:12px;align-items:center;margin-bottom:20px;">
+            <label><strong>Officina:</strong></label>
+            <select id="sel-officina" onchange="caricaInventarioDip()" style="width:250px;"></select>
+        </div>
+
+        <div class="tabs">
+            <button class="tab active" onclick="switchDipTab('servizio')">Servizi</button>
+            <button class="tab" onclick="switchDipTab('pezzo')">Ricambi</button>
+            <button class="tab" onclick="switchDipTab('articolo')">Accessori</button>
+        </div>
+
+        <div id="dip-lista"><p class="loading">seleziona un'officina...</p></div>
+    </div>
+
+    <script src="js/main.js"></script>
+</body>

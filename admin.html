@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Admin - Casa Automobilistica</title>
+    <link rel="stylesheet" href="style/style.css">
+</head>
+<body>
+
+    <header>
+        <h1>Admin Panel</h1>
+        <div>
+            <a href="index.html">← Officine</a>
+            <a href="pannel.html">← Sito</a>
+            <span>Ciao, <strong id="username"></strong>!</span>
+            <button class="btn-logout" onclick="logout()">Logout</button>
+        </div>
+    </header>
+
+    <div class="container">
+
+        <div class="tabs">
+            <button class="tab active" onclick="switchAdminTab('servizio')">Servizi</button>
+            <button class="tab"        onclick="switchAdminTab('pezzo')">Ricambi</button>
+            <button class="tab"        onclick="switchAdminTab('articolo')">Accessori</button>
+            <button class="tab"        onclick="switchAdminTab('officina')">Officine</button>
+            <button class="tab"        onclick="switchAdminTab('utenti')">Utenti</button>
+        </div>
+
+        <!-- Form aggiunta (nascosto nella tab utenti) -->
+        <div id="form-box" style="background:white;border:1px solid #ddd;border-radius:6px;padding:20px;margin-bottom:24px;">
+            <h2 style="margin-bottom:16px;" id="form-title"></h2>
+            <div id="form-fields" style="display:grid;grid-template-columns:1fr 1fr;gap:10px;"></div>
+            <div style="margin-top:14px;display:flex;align-items:center;gap:14px;">
+                <button class="btn-green" onclick="aggiungi()">Aggiungi</button>
+                <span id="form-msg" style="font-size:0.9rem;"></span>
+            </div>
+        </div>
+
+        <!-- Lista -->
+        <h2 style="margin-bottom:12px;" id="lista-title"></h2>
+        <div id="lista-items">
+            <p class="loading">Caricamento...</p>
+        </div>
+
+    </div>
+
+    <script src="js/main.js"></script>
+</body>
