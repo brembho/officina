@@ -73,7 +73,7 @@ officina/
 
 ### 1. Clone del progetto
 ```bash
-git clone https://github.com/yourusername/officina.git
+git clone https://github.com/brembho/officina
 cd officina
 ```
 
