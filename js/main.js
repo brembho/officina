@@ -441,6 +441,12 @@ async function acquista() {
 
     let response = await fetch('api/acquista.php', { method: 'POST' });
     let data = await response.json();
+    
+    if (!data.success) {
+        alert('Errore: ' + (data.message || 'Acquisto non completato'));
+        return;
+    }
+    
     alert(data.message || 'Acquisto completato!');
     loadCart();
 }
