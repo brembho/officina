@@ -2,7 +2,7 @@
 require_once __DIR__ . "/../classes/database.php";
 
 $db = new database();
-$result = $db->query("SELECT * FROM Pezzo");
+$result = $db->query("SELECT * FROM Pezzo WHERE quantita > 0");
 
 $data = [];
 while ($row = $result->fetch_assoc()) {

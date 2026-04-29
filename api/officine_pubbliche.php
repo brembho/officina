@@ -50,10 +50,10 @@ if ($action === 'per_prodotto') {
                 FROM Officina o JOIN Servizio s ON s.officina_codice=o.codice WHERE s.codice_servizio=?";
     } elseif ($tipo === 'pezzo') {
         $sql = "SELECT o.codice, o.denominazione, o.indirizzo, o.telefono, o.centrale, p.costo_unitario AS prezzo, p.quantita
-                FROM Officina o JOIN Pezzo p ON p.officina_codice=o.codice WHERE p.codice_pezzo=?";
+                FROM Officina o JOIN Pezzo p ON p.officina_codice=o.codice WHERE p.codice_pezzo=? AND p.quantita > 0";
     } elseif ($tipo === 'articolo') {
         $sql = "SELECT o.codice, o.denominazione, o.indirizzo, o.telefono, o.centrale, a.costo_unitario AS prezzo, a.quantita
-                FROM Officina o JOIN Articolo a ON a.officina_codice=o.codice WHERE a.codice_articolo=?";
+                FROM Officina o JOIN Articolo a ON a.officina_codice=o.codice WHERE a.codice_articolo=? AND a.quantita > 0";
     } else { echo json_encode(["success"=>false,"data"=>[]]); exit; }
 
     $stmt = $db->prepare($sql);
