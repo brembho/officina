@@ -26,15 +26,27 @@ switch ($method) {
         $id     = $body['prodotto_id'];
         $nome   = $body['nome'];
         $prezzo = (float) $body['prezzo'];
+        $qtaDisp = isset($body['quantita_disponibile']) ? (int) $body['quantita_disponibile'] : null;
 
         if (isset($_SESSION['carrello'][$id])) {
+            // se il prodotto è già nel carrello e ha limite di quantità, controlla
+            $qtaAttualeDisp = $_SESSION['carrello'][$id]['quantita_disponibile'] ?? $qtaDisp;
+            if ($qtaAttualeDisp !== null && $_SESSION['carrello'][$id]['quantita'] >= $qtaAttualeDisp) {
+                echo json_encode(["success" => false, "error" => "Quantità massima disponibile raggiunta"]);
+                break;
+            }
             $_SESSION['carrello'][$id]['quantita']++;
+            // aggiorna quantita_disponibile se passato
+            if ($qtaDisp !== null) {
+                $_SESSION['carrello'][$id]['quantita_disponibile'] = $qtaDisp;
+            }
         } else {
             $_SESSION['carrello'][$id] = [
                 'id'       => $id,
                 'nome'     => $nome,
                 'prezzo'   => $prezzo,
-                'quantita' => 1
+                'quantita' => 1,
+                'quantita_disponibile' => $qtaDisp
             ];
         }
         echo json_encode(["success" => true, "data" => array_values($_SESSION['carrello'])]);
@@ -48,6 +60,12 @@ switch ($method) {
 
         if (isset($_SESSION['carrello'][$id])) {
             if ($op === 'inc') {
+                $qtaDisp = isset($_SESSION['carrello'][$id]['quantita_disponibile']) ? $_SESSION['carrello'][$id]['quantita_disponibile'] : null;
+                // controlla se c'è limite di disponibilità
+                if ($qtaDisp !== null && $_SESSION['carrello'][$id]['quantita'] >= $qtaDisp) {
+                    echo json_encode(["success" => false, "error" => "Quantità massima disponibile raggiunta"]);
+                    break;
+                }
                 $_SESSION['carrello'][$id]['quantita']++;
             } elseif ($op === 'dec') {
                 $_SESSION['carrello'][$id]['quantita']--;

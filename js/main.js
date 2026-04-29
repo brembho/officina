@@ -336,7 +336,8 @@ async function apriOfficine(codice, nome, tipo) {
         html += '</span><br>';
         html += '<span class="price">Prezzo: ' + prezzoTxt + '</span>';
         html += '</div>';
-        html += '<button class="btn-primary" onclick="aggiungiAlCarrello(\'' + o.codice + '\',' + prezzo + ')">Aggiungi</button>';
+        let qtaDisp = o.quantita !== null ? o.quantita : null;
+        html += '<button class="btn-primary" onclick="aggiungiAlCarrello(\'' + o.codice + '\',' + prezzo + ',' + qtaDisp + ')">Aggiungi</button>';
         html += '</div>';
     }
 
@@ -348,7 +349,7 @@ function closeModal() {
     pending = null;
 }
 
-async function aggiungiAlCarrello(officina_codice, prezzoSpecifico) {
+async function aggiungiAlCarrello(officina_codice, prezzoSpecifico, qtaDisponibile) {
     if (!pending) {
         return;
     }
@@ -357,8 +358,14 @@ async function aggiungiAlCarrello(officina_codice, prezzoSpecifico) {
     let data = await post('api/carrello.php', {
         prodotto_id: id,
         nome: pending.nome,
-        prezzo: prezzoSpecifico
+        prezzo: prezzoSpecifico,
+        quantita_disponibile: qtaDisponibile
     });
+
+    if (!data.success) {
+        alert(data.error || 'Errore');
+        return;
+    }
 
     closeModal();
     loadCart();
@@ -403,11 +410,16 @@ async function loadCart() {
 }
 
 async function cambiaQty(id, op) {
-    await fetch('api/carrello.php', {
+    let response = await fetch('api/carrello.php', {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ prodotto_id: id, op: op })
     });
+    let data = await response.json();
+    if (!data.success) {
+        alert(data.error || 'Errore');
+        return;
+    }
     loadCart();
 }
 
